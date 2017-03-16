@@ -130,7 +130,7 @@ En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrá
         <collection property='propiedad4' ofType='Detalle' columnPrefix='detalle_'></collection>
     </resultMap>
 	```
-	Haga los ajustes necesarios en la consulta y en los 'resultMap' para que no haya inconsistencias de nombres (por ejemplo, el correo del autor de la entrada al foro y el del autor del comentario).
+	Haga los ajustes necesarios en la consulta y en los 'resultMap' para que no haya inconsistencias de nombres.
 
 
 8. Use el programa de prueba suministrado (MyBatisExample) para probar cómo a través del 'mapper' generado por MyBatis, se puede consultar un Cliente. 
