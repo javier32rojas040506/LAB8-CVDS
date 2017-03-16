@@ -39,7 +39,6 @@ En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrá
         c.vetado,
         
         ir.id ,
-        ir.CLIENTES_documento ,
         ir.fechainiciorenta ,
         ir.fechafinrenta ,
         
