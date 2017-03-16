@@ -136,12 +136,12 @@ En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrá
 8. Use el programa de prueba suministrado (MyBatisExample) para probar cómo a través del 'mapper' generado por MyBatis, se puede consultar un Cliente. 
 
 	```java	
-...
-SqlSessionFactory sessionfact = getSqlSessionFactory();
-SqlSession sqlss = sessionfact.openSession();
-ClientMapper cm=sqlss.getMapper(ClienteMapper.class);
-System.out.println(cm.getCliente(1026585665)));
-...
+	...
+	SqlSessionFactory sessionfact = getSqlSessionFactory();
+	SqlSession sqlss = sessionfact.openSession();
+	ClientMapper cm=sqlss.getMapper(ClienteMapper.class);
+	System.out.println(cm.getCliente(1026585665)));
+	...
 	```
 
 
