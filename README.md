@@ -2,8 +2,6 @@
 ### Procesos de desarrollo de Software - PDSW
 #### Tecnologías de persistencia - Frameworks de Persistencia - Introducción a MyBatis
 
-## Partes II y III: Avance para el martes en clase.
-
 
 En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrás con JDBC 'plano', pero esta vez haciendo uso de un 'framework' de persistencia. La base de datos que se utilizará tiene los siguientes parámetros:
 
@@ -15,7 +13,7 @@ En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrá
 
 ![](img/MODEL.png)
 
-##Parte I
+##Parte I (Para entregar en clase)
 
 1. Ubique los archivos de configuración para producción de MyBATIS (mybatis-config.xml). Éste está en la ruta donde normalmente se ubican los archivos de configuración de aplicaciones montadas en Maven (src/main/resources). Edítelos y agregue en éste, después de la sección &lt;settings&gt; los siguientes 'typeAliases':
 
