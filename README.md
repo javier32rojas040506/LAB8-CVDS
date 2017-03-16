@@ -139,7 +139,7 @@ En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrá
 	SqlSessionFactory sessionfact = getSqlSessionFactory();
 	SqlSession sqlss = sessionfact.openSession();
 	ClientMapper cm=sqlss.getMapper(ClienteMapper.class);
-	System.out.println(cm.getCliente(1026585665)));
+	System.out.println(cm.consultarClientes()));
 	...
 	```
 
