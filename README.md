@@ -13,7 +13,7 @@ En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrá
 
 ![](img/MODEL.png)
 
-##Parte I (Para entregar en clase)
+## Parte I (Para entregar en clase)
 
 1. Ubique los archivos de configuración para producción de MyBATIS (mybatis-config.xml). Éste está en la ruta donde normalmente se ubican los archivos de configuración de aplicaciones montadas en Maven (src/main/resources). Edítelos y agregue en éste, después de la sección &lt;settings&gt; los siguientes 'typeAliases':
 
@@ -145,7 +145,7 @@ En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrá
 	```
 
 
-##Parte II (para el Martes)
+## Parte II (para el Martes)
 
 1. Configure en el XML correspondiente, la operación consultarCliente(int id) del 'mapper' ClienteMapper.
 
@@ -172,8 +172,9 @@ En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrá
 	* Para poder configurar dichas operaciones, se necesita el 'resultMap' definido en ClientMapper. Para evitar tener CODIGO REPETIDO, mueva el resultMap _ItemResult_ de ClienteMapper.xml a ItemMapper.xml. Luego, como dentro de ClienteMapper el resultMap _ItemRentadoResult_ requiere del resultMap antes movido, haga referencia al mismo usando como referencia absoluta en 'namespace' de ItemMapper.xml:
 
 	```xml	
-   <resultMap type='ItemRentado' id="ItemRentadoResult">            
-            <association ... resultMap='edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult'></association> 
-   </resultMap>
+	<resultMap type='ItemRentado' id="ItemRentadoResult">            
+		<association ... resultMap='edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult'></association> 
+	</resultMap>
 	```
+	
 	Verifique el funcionamiento haciendo una consulta a través del 'mapper' desde MyBatisExample.
