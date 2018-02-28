@@ -59,10 +59,10 @@ En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrá
         left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
 	```
 
-3. Abra el archivo XML en el cual se definirán los parámetros para que MyBatis genere el 'mapper' de Cliente (ClienteMapper.xml). Ahora, mapee un elemento de tipo \<select> al método 'getClientes':
+3. Abra el archivo XML en el cual se definirán los parámetros para que MyBatis genere el 'mapper' de Cliente (ClienteMapper.xml). Ahora, mapee un elemento de tipo \<select> al método 'consultarClientes':
 
 	```xml
-   <select parameterType="map" id="getClientes" resultMap="ClienteResult">
+   <select parameterType="map" id="consultarClientes" resultMap="ClienteResult">
    			SENTENCIA SQL
 	</select>
 	```
