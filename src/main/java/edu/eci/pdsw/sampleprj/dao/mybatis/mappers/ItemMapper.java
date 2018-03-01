@@ -13,7 +13,7 @@ import org.apache.ibatis.annotations.Param;
 public interface ItemMapper {
     
     
-    public List<Item> getItems();        
+    public List<Item> consultarItems();        
     
     public Item consultarItem(int id);
     
