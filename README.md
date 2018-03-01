@@ -78,14 +78,14 @@ En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrá
         <collection property='propiedad4' ofType='DetalleUno'></collection>
     </resultMap>
 
-    <resultMap type='DetalleUno' id='DetalleResult'>
+    <resultMap type='DetalleUno' id='DetalleUnoResult'>
         <id property='propiedadx' column='COLUMNAX'/>
         <result property='propiedady' column='COLUMNAY'/>
         <result property='propiedadz' column='COLUMNAZ'/> 
 	<association property="propiedadw" javaType="DetalleDos"></association>      
     </resultMap>
     
-    <resultMap type='DetalleDos' id='DetalleResult'>
+    <resultMap type='DetalleDos' id='DetalleDosResult'>
         <id property='propiedadr' column='COLUMNAR'/>
         <result property='propiedads' column='COLUMNAS'/>
         <result property='propiedadt' column='COLUMNAT'/>        
