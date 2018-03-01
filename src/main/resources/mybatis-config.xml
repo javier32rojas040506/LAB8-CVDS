@@ -7,24 +7,33 @@
         <setting name="logImpl" value="LOG4J"/>        
     </settings>-->
     
+    <properties resource="config.properties">
+    </properties>
+    <typeAliases>
+        <typeAlias type="edu.eci.pdsw.samples.entities.Cliente" alias="Cliente"/>
+        <typeAlias type="edu.eci.pdsw.samples.entities.Item" alias="Item"/>
+        <typeAlias type="edu.eci.pdsw.samples.entities.ItemRentado" alias="ItemRentado"/>
+        <typeAlias type="edu.eci.pdsw.samples.entities.TipoItem" alias="TipoItem"/>
+    </typeAliases>	
 
-        
-                        
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC" />
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://desarrollo.is.escuelaing.edu.co:3306/bdprueba" />
-                <property name="username" value="bdprueba" />
-                <property name="password" value="bdprueba" />
+                <property name="driver" value="${driver}" />
+                <!--property name="url" value="jdbc:mysql://localhost:3306/video_rental"/!-->
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}" />
+                <property name="password" value="${password}" />
+
+                <!--property name="url" value="jdbc:mysql://localhost:3306/video_rental"/!-->
             </dataSource>
         </environment>
     </environments>
         
     <mappers>
         <mapper resource="mappers/ClienteMapper.xml"></mapper>
-        <mapper resource="mappers/ItemMapper.xml"></mapper>        
+        <mapper resource="mappers/ItemMapper.xml"></mapper>
         <mapper resource="mappers/TipoItemMapper.xml"></mapper>        
     </mappers> 
         
