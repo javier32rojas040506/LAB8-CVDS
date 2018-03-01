@@ -148,12 +148,12 @@ En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrá
 
 1. Configure en el XML correspondiente, la operación consultarCliente(int id) del 'mapper' ClienteMapper.
 
-	En este caso, a diferencia del método anterior (cargar todos), el método asociado al 'mapper' tiene parámetros que se deben usar en la sentencia SQL. Es decir, el parámetro 'id' de  _public Cliente getCliente(int id);_ se debe usar en el WHERE de su correspondiente sentencia SQL. Para hacer esto tenga en cuenta:
+	En este caso, a diferencia del método anterior (cargar todos), el método asociado al 'mapper' tiene parámetros que se deben usar en la sentencia SQL. Es decir, el parámetro 'id' de  _public Cliente consultarCliente(int id);_ se debe usar en el WHERE de su correspondiente sentencia SQL. Para hacer esto tenga en cuenta:
 
 	* Agregue la anotación @Param a dicho parámetro, asociando a ésta el nombre con el que se referirá en la sentencia SQL:
 
 	```java
-		public Cliente getCliente(@Param("idcli") int id);
+		public Cliente consultarCliente(@Param("idcli") int id);
 	
 	```
 
