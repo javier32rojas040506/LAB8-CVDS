@@ -59,10 +59,10 @@ En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrá
         left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id 
 	```
 
-3. Abra el archivo XML en el cual se definirán los parámetros para que MyBatis genere el 'mapper' de Cliente (ClienteMapper.xml). Ahora, mapee un elemento de tipo \<select> al método 'getClientes':
+3. Abra el archivo XML en el cual se definirán los parámetros para que MyBatis genere el 'mapper' de Cliente (ClienteMapper.xml). Ahora, mapee un elemento de tipo \<select> al método 'consultarClientes':
 
 	```xml
-   <select parameterType="map" id="getClientes" resultMap="ClienteResult">
+   <select parameterType="map" id="consultarClientes" resultMap="ClienteResult">
    			SENTENCIA SQL
 	</select>
 	```
@@ -74,18 +74,18 @@ En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrá
         <id property='propiedad1' column='COLUMNA1'/>
         <result property='propiedad2' column='COLUMNA2'/>
         <result property='propiedad3' column='COLUMNA3'/>  
+        <association property="propiedad5" javaType="DetalleDos"></association>      
         <collection property='propiedad4' ofType='DetalleUno'></collection>
-		<association property="propiedad5" javaType="DetalleDos"></association>      
     </resultMap>
 
-    <resultMap type='DetalleUno' id='DetalleResult'>
+    <resultMap type='DetalleUno' id='DetalleUnoResult'>
         <id property='propiedadx' column='COLUMNAX'/>
         <result property='propiedady' column='COLUMNAY'/>
         <result property='propiedadz' column='COLUMNAZ'/> 
-		 <association property="propiedadw" javaType="DetalleDos"></association>      
+	<association property="propiedadw" javaType="DetalleDos"></association>      
     </resultMap>
     
-    <resultMap type='DetalleDos' id='DetalleResult'>
+    <resultMap type='DetalleDos' id='DetalleDosResult'>
         <id property='propiedadr' column='COLUMNAR'/>
         <result property='propiedads' column='COLUMNAS'/>
         <result property='propiedadt' column='COLUMNAT'/>        
@@ -95,7 +95,7 @@ En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrá
 
 	Como observa, Para cada propiedad de la clase se agregará un elemento de tipo &lt;result&gt;, el cual, en la propiedad 'property' indicará el nombre de la propiedad, y en la columna 'column' indicará el nombre de la columna de su tabla correspondiente (en la que se hará persistente). En caso de que la columna sea una llave primaria, en lugar de 'result' se usará un elemento de tipo 'id'. Cuando la clase tiene una relación de composición con otra, se agrega un elemento de tipo &lt;association&gt;.Finalmente, observe que si la clase tiene un atributo de tipo colección (List, Set, etc), se agregará un elemento de tipo &lt;collection&gt;, indicando (en la propiedad 'ofType') de qué tipo son los elementos de la colección. En cuanto al indentificador del 'resultMap', como convención se suele utilizar el nombre del tipo de dato concatenado con 'Result' como sufijo.
 	
-	Teniendo en cuenta lo anterior, haga tres 'resultMap': uno para la clase Cliente, otro para la clase ItemRentado, otro para la clase Item, y otro para la clase TipoItem. 
+	Teniendo en cuenta lo anterior, haga cuatro 'resultMap': uno para la clase Cliente, otro para la clase ItemRentado, otro para la clase Item, y otro para la clase TipoItem. 
 
 5. Una vez haya hecho lo anterior, es necesario que en el elemento &lt;collection&gt; del maestro se agregue una propiedad que indique cual es el 'resultMap' a través del cual se podrá 'mapear' los elementos contenidos en dicha colección. Para el ejemplo anterior, como la colección contiene elementos de tipo 'Detalle', se agregará el elemento __resultMap__ con el identificador del 'resultMap' de Detalle:
 
@@ -148,12 +148,12 @@ En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrá
 
 1. Configure en el XML correspondiente, la operación consultarCliente(int id) del 'mapper' ClienteMapper.
 
-	En este caso, a diferencia del método anterior (cargar todos), el método asociado al 'mapper' tiene parámetros que se deben usar en la sentencia SQL. Es decir, el parámetro 'id' de  _public Cliente getCliente(int id);_ se debe usar en el WHERE de su correspondiente sentencia SQL. Para hacer esto tenga en cuenta:
+	En este caso, a diferencia del método anterior (cargar todos), el método asociado al 'mapper' tiene parámetros que se deben usar en la sentencia SQL. Es decir, el parámetro 'id' de  _public Cliente consultarCliente(int id);_ se debe usar en el WHERE de su correspondiente sentencia SQL. Para hacer esto tenga en cuenta:
 
 	* Agregue la anotación @Param a dicho parámetro, asociando a ésta el nombre con el que se referirá en la sentencia SQL:
 
 	```java
-		public Cliente getCliente(@Param("idcli") int id);
+		public Cliente consultarCliente(@Param("idcli") int id);
 	
 	```
 
@@ -165,7 +165,7 @@ En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrá
 3. Configure en el XML correspondiente, la operación agregarItemRentadoACliente. Verifique el funcionamiento haciendo una consulta a través del 'mapper' desde MyBatisExample.
 
 4. Configure en el XML correspondiente (en este caso ItemMapper.xml) la operación 'insertarItem(Item it). Para este tenga en cuenta:
-	* Al igual que en en los dos casos anteriores, el query estará basado en los parámetros ingrasdos (en este caso, un objeto Item). En este caso, al hacer uso de la anotación @Param, la consulta SQL se podrá componer con los atributos de dicho objeto. Por ejemplo, si al paramétro se le da como nombre ("item"): __insertarItem(@Param("item")Item it)__, en el query se podría usar #{item.id}, #{item.nombre}, #{item.descripcion}, etc. Verifique el funcionamiento haciendo una consulta a través del 'mapper' desde MyBatisExample.
+	* Al igual que en en los dos casos anteriores, el query estará basado en los parámetros ingresados (en este caso, un objeto Item). En este caso, al hacer uso de la anotación @Param, la consulta SQL se podrá componer con los atributos de dicho objeto. Por ejemplo, si al paramétro se le da como nombre ("item"): __insertarItem(@Param("item")Item it)__, en el query se podría usar #{item.id}, #{item.nombre}, #{item.descripcion}, etc. Verifique el funcionamiento haciendo una consulta a través del 'mapper' desde MyBatisExample.
 	
 5. 	Configure en el XML correspondiente (de nuevo en ItemMapper.xml) las operaciones 'consultarItem(int it) y 'consultarItems()' de ItemMapper. En este caso, tenga adicionalmente en cuenta:
 	* Para poder configurar dichas operaciones, se necesita el 'resultMap' definido en ClientMapper. Para evitar tener CODIGO REPETIDO, mueva el resultMap _ItemResult_ de ClienteMapper.xml a ItemMapper.xml. Luego, como dentro de ClienteMapper el resultMap _ItemRentadoResult_ requiere del resultMap antes movido, haga referencia al mismo usando como referencia absoluta en 'namespace' de ItemMapper.xml:
