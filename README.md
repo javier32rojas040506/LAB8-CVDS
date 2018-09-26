@@ -144,7 +144,7 @@ En este laboratorio se utilizará un 'framework' de persistencia. La base de dat
 	```
 
 
-## Parte II (para el Martes)
+## Parte II (para el Miércoles)
 
 1. Configure en el XML correspondiente, la operación consultarCliente(int id) del 'mapper' ClienteMapper.
 
