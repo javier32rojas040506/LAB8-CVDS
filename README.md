@@ -3,7 +3,7 @@
 #### Tecnologías de persistencia - Frameworks de Persistencia - Introducción a MyBatis
 
 
-En este laboratorio, se realizará el mismo ejercicio desarrollado semanas atrás con JDBC 'plano', pero esta vez haciendo uso de un 'framework' de persistencia. La base de datos que se utilizará tiene los siguientes parámetros:
+En este laboratorio se utilizará un 'framework' de persistencia. La base de datos que se utilizará tiene los siguientes parámetros:
 
 	host: desarrollo.is.escuelaing.edu.co
 	puerto: 3306
