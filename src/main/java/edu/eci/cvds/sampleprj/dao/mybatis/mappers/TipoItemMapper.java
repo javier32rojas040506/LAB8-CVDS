@@ -1,14 +1,11 @@
-package edu.eci.pdsw.sampleprj.dao.mybatis.mappers;
+package edu.eci.cvds.sampleprj.dao.mybatis.mappers;
 
 
-import edu.eci.pdsw.samples.entities.TipoItem;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-/**
- *
- * @author 2106913
- */
+import edu.eci.cvds.samples.entities.TipoItem;
+
 public interface TipoItemMapper {
     
     

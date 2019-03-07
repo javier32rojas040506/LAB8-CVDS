@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.eci.pdsw.samples.entities;
+package edu.eci.cvds.samples.entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
-/**
- *
- * @author 2106913
- */
 public class Cliente implements Serializable{
     
     private String nombre;

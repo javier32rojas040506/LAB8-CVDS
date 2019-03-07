@@ -1,5 +1,5 @@
 ### Escuela Colombiana de Ingeniería
-### Procesos de desarrollo de Software - PDSW
+### Ciclos de Vida del desarrollo de Software – CVDS
 #### Tecnologías de persistencia - Frameworks de Persistencia - Introducción a MyBatis
 
 
@@ -19,10 +19,10 @@ En este laboratorio se utilizará un 'framework' de persistencia. La base de dat
 
 	```xml
     <typeAliases>
-        <typeAlias type='edu.eci.pdsw.samples.entities.Cliente' alias='Cliente'/>
-        <typeAlias type='edu.eci.pdsw.samples.entities.Item' alias='Item'/>
-        <typeAlias type='edu.eci.pdsw.samples.entities.ItemRentado' alias='ItemRentado'/>
-        <typeAlias type='edu.eci.pdsw.samples.entities.TipoItem' alias='TipoItem'/>
+        <typeAlias type='edu.eci.cvds.samples.entities.Cliente' alias='Cliente'/>
+        <typeAlias type='edu.eci.cvds.samples.entities.Item' alias='Item'/>
+        <typeAlias type='edu.eci.cvds.samples.entities.ItemRentado' alias='ItemRentado'/>
+        <typeAlias type='edu.eci.cvds.samples.entities.TipoItem' alias='TipoItem'/>
     </typeAliases>	
     ```
 
@@ -172,7 +172,7 @@ En este laboratorio se utilizará un 'framework' de persistencia. La base de dat
 
 	```xml	
 	<resultMap type='ItemRentado' id="ItemRentadoResult">            
-		<association ... resultMap='edu.eci.pdsw.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult'></association> 
+		<association ... resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult'></association> 
 	</resultMap>
 	```
 	
