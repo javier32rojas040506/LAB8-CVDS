@@ -8,7 +8,7 @@ En este laboratorio se utilizará un 'framework' de persistencia. La base de dat
 	host: desarrollo.is.escuelaing.edu.co
 	puerto: 3306
 	usuario: bdprueba
-	pwd: bdprueba
+	pwd: prueba2019
 	base de datos: bdprueba
 
 ![](img/MODEL.png)
