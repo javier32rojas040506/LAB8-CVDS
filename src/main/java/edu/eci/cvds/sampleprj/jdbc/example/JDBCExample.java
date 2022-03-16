@@ -31,106 +31,115 @@ import java.util.logging.Logger;
  * @author hcadavid
  */
 public class JDBCExample {
-    
-    public static void main(String args[]){
+
+    public static void main(String args[]) {
         try {
-            String url="jdbc:mysql://desarrollo.is.escuelaing.edu.co:3306/bdprueba";
-            String driver="com.mysql.jdbc.Driver";
-            String user="bdprueba";
-            String pwd="prueba2019";
-                        
+            String url = "jdbc:mysql://desarrollo.is.escuelaing.edu.co:3306/bdprueba";
+            String driver = "com.mysql.jdbc.Driver";
+            String user = "bdprueba";
+            String pwd = "prueba2019";
+
             Class.forName(driver);
-            Connection con=DriverManager.getConnection(url,user,pwd);
+            Connection con = DriverManager.getConnection(url, user, pwd);
             con.setAutoCommit(false);
-                 
-            
-            System.out.println("Valor total pedido 1:"+valorTotalPedido(con, 1));
-            
-            List<String> prodsPedido=nombresProductosPedido(con, 1);
-            
-            
+
+            System.out.println("Valor total pedido 1:" + valorTotalPedido(con, 1));
+
+            List<String> prodsPedido = nombresProductosPedido(con, 1);
+
             System.out.println("Productos del pedido 1:");
             System.out.println("-----------------------");
-            for (String nomprod:prodsPedido){
+            for (String nomprod : prodsPedido) {
                 System.out.println(nomprod);
             }
             System.out.println("-----------------------");
-            
-            
-            int suCodigoECI=20134423;
-            registrarNuevoProducto(con, suCodigoECI, "SU NOMBRE", 99999999);            
+
+            int suCodigoECI = 2165690;
+            // registrarNuevoProducto(con, suCodigoECI, "Juan Rojas", 180000);
             con.commit();
-                        
-            
+
             con.close();
-                                   
+
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(JDBCExample.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
     }
-    
+
     /**
      * Agregar un nuevo producto con los parámetros dados
-     * @param con la conexión JDBC
+     * 
+     * @param con    la conexión JDBC
      * @param codigo
      * @param nombre
      * @param precio
-     * @throws SQLException 
+     * @throws SQLException
      */
-    public static void registrarNuevoProducto(Connection con, int codigo, String nombre,int precio) throws SQLException{
-        //Crear preparedStatement
+    public static void registrarNuevoProducto(Connection con, int codigo, String nombre, int precio)
+            throws SQLException {
+        // Crear preparedStatement
         String insertProductString = "INSERT INTO ORD_PRODUCTOS VALUES(?,?,?)";
         PreparedStatement insertProduct = con.prepareStatement(insertProductString);
-        //Asignar parámetros
-        insertProduct.setInt(1,codigo);
+        // Asignar parámetros
+        insertProduct.setInt(1, codigo);
         insertProduct.setString(2, nombre);
         insertProduct.setInt(3, precio);
-        //usar 'execute'
+        // usar 'execute'
         insertProduct.executeUpdate();
         con.commit();
-        
+
     }
-    
+
     /**
      * Consultar los nombres de los productos asociados a un pedido
-     * @param con la conexión JDBC
+     * 
+     * @param con          la conexión JDBC
      * @param codigoPedido el código del pedido
-     * @return 
+     * @return
      */
-    public static List<String> nombresProductosPedido(Connection con, int codigoPedido){
-        List<String> np=new LinkedList<>();
-        
-        //Crear prepared statement
-        String getNamesProducts = "SELECT nombre from ORD_PRODUCTOS JOIN ORD";
-        //asignar parámetros
-        //usar executeQuery
-        //Sacar resultados del ResultSet
-        //Llenar la lista y retornarla
-        
+    public static List<String> nombresProductosPedido(Connection con, int codigoPedido) throws SQLException{
+        List<String> np = new LinkedList<>();
+
+        // Crear prepared statement
+        String getNamesProducts = "SELECT Pr.nombre " + "FROM ORD_PRODUCTOS AS Pr "
+                + "INNER JOIN ORD_DETALLE_PEDIDO AS Dp " + "ON Dp.producto_fk = Pr.codigo "
+                + "WHERE Dp.pedido_fk = ? ;";
+        PreparedStatement productosPedido = con.prepareStatement(getNamesProducts);
+        // asignar parámetros
+        productosPedido.setInt(1, codigoPedido);
+        // usar executeQuery
+        ResultSet resultSet = productosPedido.executeQuery();
+        // Sacar resultados del ResultSet
+        while (resultSet.next()) {
+            np.add(resultSet.getString(1));
+        }
+        // Llenar la lista y retornarla
         return np;
     }
 
-    
     /**
      * Calcular el costo total de un pedido
+     * 
      * @param con
      * @param codigoPedido código del pedido cuyo total se calculará
      * @return el costo total del pedido (suma de: cantidades*precios)
      */
-    public static int valorTotalPedido(Connection con, int codigoPedido){
-        
-        //Crear prepared statement
-        //asignar parámetros
-        //usar executeQuery
-        //Sacar resultado del ResultSet
-        
-        return 0;
+    public static int valorTotalPedido(Connection con, int codigoPedido) throws SQLException{
+        // Inicializar Variables
+        int totalCost = 0;
+        // Crear prepared statement
+        String productName = "SELECT SUM(Po.precio*Op.cantidad) " + "FROM ORD_PRODUCTOS Po "
+                + "INNER JOIN  ORD_DETALLE_PEDIDO Op " + " ON Po.codigo = Op.producto_fk " + "WHERE Op.pedido_fk = ? ;";
+        PreparedStatement productoPedido = con.prepareStatement(productName);
+        // asignar parámetros
+        productoPedido.setInt(1, codigoPedido);
+        // usar executeQuery
+        ResultSet resultSet = productoPedido.executeQuery();
+        // Sacar resultado del ResultSet
+        while (resultSet.next()) {
+            totalCost += resultSet.getInt(1);
+        }
+        return totalCost;
     }
-    
 
-    
-    
-    
 }
