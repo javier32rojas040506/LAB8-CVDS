@@ -12,13 +12,9 @@ import edu.eci.cvds.samples.entities.Item;
  * @author 2106913
  */
 public interface ItemMapper {
-    
-    
-    public List<Item> consultarItems();        
-    
-    public Item consultarItem(int id);
-    
-    public void insertarItem(Item it);
+    public List<Item> consultarItems();
 
-        
+    public Item consultarItem(@Param("idt") int id);
+
+    public void insertarItem(@Param("item")Item it);
 }
