@@ -11,33 +11,10 @@
         c.telefono as ClientePhone,
         c.direccion as ClienteDir,
         c.email as ClienteEmail,
-        c.vetado as ClienteVetado,
+        c.vetado as ClienteVetado
 
-        ir.id as ir_ItemRentadoId,
-        ir.fechainiciorenta as ir_ItemRentadoStartDate,
-        ir.fechafinrenta ir_ItemRentadoEndDate,
-
-        i.id as ir_item_ItemId,
-        i.nombre as ir_item_ItemName,
-        i.descripcion as ir_item_ItemDesc,
-        i.fechalanzamiento as ir_item_ItemReleaseDate,
-        i.tarifaxdia as ir_item_ItemTariff,
-        i.formatorenta as ir_item_ItemFormat,
-        i.genero as ir_item_ItemGender,
-
-        ti.id as ir_item_tipoItem_TipoItemId,
-        ti.descripcion as ir_item_TipoItemDesc
-
-        FROM VI_CLIENTES as c
-        left join VI_ITEMRENTADO as ir on c.documento=ir.CLIENTES_documento
-        left join VI_ITEMS as i on ir.ITEMS_id=i.id
-        left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id
+        FROM VI_CLIENTES as c;
     </select>
-
-    <insert id="registrarCliente" parameterType="map">
-        insert into VI_CLIENTES values(#{cliente.documento},#{cliente.nombre},#{cliente.telefono},#{cliente.direccion},#{cliente.email},#{cliente.vetado});
-    </insert>
-
     <select parameterType="map" id="consultarCliente" resultMap="ClienteResult">
         select
         c.nombre as ClienteName,
@@ -45,15 +22,12 @@
         c.telefono as ClientePhone,
         c.direccion as ClienteDir,
         c.email as ClienteEmail,
-        c.vetado as ClienteVetado,
+        c.vetado as ClienteVetado
 
         FROM VI_CLIENTES as c
 
-        WHERE c.documento=#{idcli};
+        WHERE #{idcli} =  c.documento;
     </select>
-    <insert id="registrarCliente" parameterType="map">
-        insert into VI_CLIENTES values(#{cliente.documento},#{cliente.nombre},#{cliente.telefono},#{cliente.direccion},#{cliente.email},#{cliente.vetado});
-    </insert>
     <resultMap type='Cliente' id='ClienteResult'>
         <id property='documento' column='ClienteDoc'/>
         <result property='nombre' column='ClienteName'/>
@@ -61,7 +35,6 @@
         <result property='direccion' column='ClienteDir'/>
         <result property='email' column='ClienteEmail'/>
         <result property='vetado' column='ClienteVetado'/>
-        <collection property="ItemRentados" ofType="ItemRentado" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemRentadoMapper.ItemRentadoResult" columnPrefix="ir_"></collection>
     </resultMap>
 </mapper>
 
