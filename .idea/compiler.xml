@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="MyBATIS-Guice-DAO-VideorentalServicesLayer" target="1.8" />
+      <module name="MyBATIS-Guice-DAO-VideorentalServicesLayer" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
