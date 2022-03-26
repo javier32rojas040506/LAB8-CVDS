@@ -146,10 +146,7 @@ public class MyBatisExample {
      * @throws SQLException
      */
     public static void main(String args[]) throws SQLException, ExcepcionServiciosAlquiler {
-        ServiciosAlquiler alquilerLogicImpl = new ServiciosAlquilerItemsImpl();
-        System.out.println(alquilerLogicImpl.consultarClientes());
-        //Consultar cliente por documento
-        System.out.println(alquilerLogicImpl.consultarCliente(1026585663));
+        Injector guice = Guice.createInjector();
 
     }
 
