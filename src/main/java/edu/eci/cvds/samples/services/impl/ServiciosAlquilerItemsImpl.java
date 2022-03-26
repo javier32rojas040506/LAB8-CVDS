@@ -28,6 +28,7 @@ public class ServiciosAlquilerItemsImpl implements ServiciosAlquiler {
 
     @Override
     public Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler {
+        ClienteDAO client = ClienteDAO
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
