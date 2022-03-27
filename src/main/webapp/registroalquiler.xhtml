@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+    <style type="text/css">
+        * {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .form {
+            margin: auto;
+            top: 50%;
+            width: 50%;
+            -ms-transform: translateY(50%);
+            transform: translateY(50%);
+            backdrop-filter: blur(3px);
+            border-radius: 20px;
+            padding: 20px;
+        }
+    </style>
+</h:head>
+<h:body>
+    <a href="/faces/index.jsp" style="margin-left: 20px">Volver</a>
+    <a href="/faces/registrocliente.xhtml" style="margin-left: 20px">Registrar Cliente</a>
+    <h:form id="calculadora_form" class="form glowing">
+        <h1>
+            Regisrar Alquiler
+        </h1>
+        <p:dataTable var="itrent" value="#{AlquilerItemsBean.getSelectedCliente().rentados}"
+                     paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                     rows="10">
+            <f:facet name="header">
+                Items Alquilados
+            </f:facet>
+            <p:column headerText="Item Rentado">
+                <h:outputText value="#{itrent.item.nombre}"/>
+            </p:column>
+
+            <p:column headerText="Multa">
+                <h:outputText value="#{AlquilerItemsBean.consultarMulta(itrent.item)}"/>
+            </p:column>
+
+
+        </p:dataTable>
+
+        <br/>
+
+        <p:outputLabel class="labelCenter" style="font-size: 25px"><strong>Alquilar Item</strong></p:outputLabel>
+
+        <h:panelGrid id="grid" cellpadding="5" columns="2" class="panelCenter" style="margin-bottom:10px">
+
+            <p:outputLabel value="ItemID"/>
+            <p:inputText id="itid" type="int" binding="#{itid}"/>
+
+            <p:outputLabel value="Dias"/>
+            <p:inputText id="ndias" type="int" binding="#{dias}"/>
+
+            <p:outputLabel value="Costo: "/>
+            <p:outputLabel value="#{AlquilerItemsBean.costo}"/>
+            <p:commandButton class="Button" value="Consular costo" action="#{AlquilerItemsBean.consultarCosto(itid.value,dias.value)}" update="Alquiler_Form"/>
+
+            <p:commandButton class="Button" value="Alquilar" action="registrocliente?faces-redirect = true" >
+                <f:actionListener binding="#{AlquilerItemsBean.registrarAlquilerCliente(itid.value,dias.value)}"/>
+            </p:commandButton>
+
+        </h:panelGrid>
+    </h:form>
+</h:body>
+</html>
