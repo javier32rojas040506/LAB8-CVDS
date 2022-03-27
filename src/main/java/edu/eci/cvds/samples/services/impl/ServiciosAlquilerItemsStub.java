@@ -35,7 +35,7 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
         itemsrentados = new HashMap<>();
         tipositems = new HashMap<>();
         mapaPrestamosPorIdCliente=new HashMap<>();
-        //poblar();
+        poblar();
     }
 
     @Override

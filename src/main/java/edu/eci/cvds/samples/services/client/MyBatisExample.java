@@ -146,7 +146,11 @@ public class MyBatisExample {
      * @throws SQLException
      */
     public static void main(String args[]) throws SQLException, ExcepcionServiciosAlquiler {
-        Injector guice = Guice.createInjector();
+
+        Injector guice = Guice.createInjector((com.google.inject.Module) ServiciosAlquilerFactory.getInstance().getServiciosAlquiler());
+        ServiciosAlquiler serviciosAlquiler = guice.getInstance(ServiciosAlquiler.class);
+        System.out.println(serviciosAlquiler.consultarCliente(1));
+
 
     }
 

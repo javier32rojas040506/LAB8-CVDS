@@ -10,7 +10,9 @@ import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISClienteDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISItemDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISItemRentadoDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISTipoItemDAO;
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.cvds.samples.services.impl.ServiciosAlquilerItemsImpl;
+import edu.eci.cvds.samples.services.impl.ServiciosAlquilerItemsStub;
 import org.mybatis.guice.XMLMyBatisModule;
 
 import java.util.Optional;
@@ -33,7 +35,7 @@ public class ServiciosAlquilerFactory {
                 bind(ClienteDAO.class).to(MyBATISClienteDAO.class);
                 bind(TipoItemDAO.class).to(MyBATISTipoItemDAO.class);
                 bind(ItemRentadoDAO.class).to(MyBATISItemRentadoDAO.class);
-                bind(ServiciosAlquiler.class).to(ServiciosAlquilerItemsImpl.class);
+                bind(ServiciosAlquiler.class).to(ServiciosAlquilerItemsStub.class);
             }
         });
     }
