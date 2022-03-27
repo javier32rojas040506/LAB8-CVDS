@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <style type="text/css">
+        * {
+            font-family: 'Orbitron', sans-serif;
+        }
+        .form {
+            margin: auto;
+            top: 50%;
+            width: 50%;
+            -ms-transform: translateY(50%);
+            transform: translateY(50%);
+            backdrop-filter: blur(3px);
+            border-radius: 20px;
+            padding: 20px;
+        }
+    </style>
+</h:head>
+<h:body>
+    <a href="/faces/index.jsp" style="margin-left: 20px">Volver</a>
+    <a href="/faces/registroalquiler.xhtml" style="margin-left: 20px">Registrar Alquiler</a>
+    <h:form id="calculadora_form" class="form">
+        <h1>
+            Regisrar Clientes
+        </h1>
+        <p:dataTable var="cliente" value="#{AlquilerItemsBean.consultarClientes()}"
+                     paginator="true" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                     rows="10" selectionMode="single" id="documento" selection="#{AlquilerItemsBean.selectedCliente}"
+                     rowKey="#{cliente.getDocumento()}">
+            <f:facet name="header">
+                Clientes
+            </f:facet>
+            <p:column headerText="Documento">
+                <h:outputText value="#{cliente.getDocumento()}" />
+            </p:column>
+            <p:column headerText="Nombre" >
+                <h:outputText value="#{cliente.getNombre()}" />
+            </p:column>
+            <p:column headerText="Telefono">
+                <h:outputText value="#{cliente.getTelefono()}" />
+            </p:column>
+            <p:column headerText="Direccion">
+                <h:outputText value="#{cliente.getDireccion()}" />
+            </p:column>
+            <p:column headerText="Email">
+                <h:outputText value="#{cliente.getEmail()}" />
+            </p:column>
+            <p:column headerText="Vetado">
+                <h:outputText value="#{cliente.isVetado()}" />
+            </p:column>
+
+            <f:facet name="footer">
+                <h:commandButton id="clisele"  value="Ver" action="registroalquiler?faces-redirect = true"/>
+            </f:facet>
+        </p:dataTable>
+
+        <h:panelGrid id="grid" cellpadding="5" columns="2" style="margin-bottom:10px">
+            <p:outputLabel for="Documento" style="color:red;font-size:200%" value="Documento: " />
+            <p:inputText id="Documento" type="long" binding="#{doc}" />
+
+            <p:outputLabel for="Nombre" style="color:red;font-size:200%" value="Nombre: "/>
+            <p:inputText id="Nombre" type="String" binding="#{name}"/>
+
+            <p:outputLabel for="Direccion" style="color:red;font-size:200%" value="Direccion: "/>
+            <p:inputText id="Direccion" type="String" binding="#{dir}"/>
+
+            <p:outputLabel for="Telefono" style="color:red;font-size:200%" value="Telefono: " />
+            <p:inputText id="Telefono" type="String" binding="#{tele}"/>
+
+            <p:outputLabel for="Email" style="color:red;font-size:200%" value="Email: " />
+            <p:inputText id="Email" type="String" binding="#{mail}"/>
+
+        </h:panelGrid>
+        <div class="divButton">
+            <p:commandButton update="Client_Form" class="Button" actionListener="#{AlquilerItemsBean.registrarCliente(doc.value,name.value,tele.value,dir.value,mail.value)}" value="Registrar Cliente"/>
+        </div>
+    </h:form>
+</h:body>
+</html>
