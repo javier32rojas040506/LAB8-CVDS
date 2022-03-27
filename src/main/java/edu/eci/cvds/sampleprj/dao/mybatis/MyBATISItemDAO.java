@@ -11,6 +11,7 @@ import edu.eci.cvds.samples.entities.TipoItem;
 import org.apache.ibatis.exceptions.PersistenceException;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public class MyBATISItemDAO implements ItemDAO{
 
@@ -37,6 +38,16 @@ public class MyBATISItemDAO implements ItemDAO{
             throw new PersistenceException("Error al consultar el item "+id,e);
         }
 
+
+    }
+
+    @Override
+    public List<Item> load() {
+        return null;
+    }
+
+    @Override
+    public void actualizarTarifa(int id, long tarifa) {
 
     }
 

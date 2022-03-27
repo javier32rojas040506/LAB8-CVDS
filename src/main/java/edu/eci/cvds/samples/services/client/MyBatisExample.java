@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.inject.Guice;
@@ -93,63 +94,28 @@ public class MyBatisExample {
     }
 
     /**
-     * Programa que usa la logica punto 8 parte I
-     * @param args
-     * @throws SQLException
-     */
-    public static void logicProveStub(String args[]) throws SQLException, ExcepcionServiciosAlquiler {
-        ServiciosAlquilerItemsStub alquilerLogic = new ServiciosAlquilerItemsStub();
-
-        //poblar TipoItem
-        TipoItem ti1=new TipoItem(1,"Video");
-        TipoItem ti2=new TipoItem(2,"Juego");
-        TipoItem ti3=new TipoItem(3,"Musica");
-
-        //poblar Item
-        Item i1=new Item(ti1, 1, "Los 4 Fantasticos", "Los 4 Fantásticos  es una película de superhéroes  basada en la serie de cómic homónima de Marvel.", java.sql.Date.valueOf("2005-06-08"), 2000, "DVD", "Ciencia Ficcion");
-        Item i2=new Item(ti2, 2, "Halo 3", "Halo 3 es un videojuego de disparos en primera persona desarrollado por Bungie Studios.", java.sql.Date.valueOf("2007-09-08"), 3000, "DVD", "Shooter");
-        Item i3=new Item(ti3, 3, "Thriller", "Thriller es una canción interpretada por el cantante estadounidense Michael Jackson, compuesta por Rod Temperton y producida por Quincy Jones.", java.sql.Date.valueOf("1984-01-11"), 2000, "DVD", "Pop");
-        Item i4=new Item(ti1, 4, "Los 4 Fantasticos", "Los 4 Fantásticos  es una película de superhéroes  basada en la serie de cómic homónima de Marvel.", java.sql.Date.valueOf("2005-06-08"), 2000, "DVD", "Ciencia Ficcion");
-        Item i5=new Item(ti2, 5, "Halo 3", "Halo 3 es un videojuego de disparos en primera persona desarrollado por Bungie Studios.", java.sql.Date.valueOf("2007-09-08"), 3000, "DVD", "Shooter");
-        Item i6=new Item(ti3, 6, "Thriller", "Thriller es una canción interpretada por el cantante estadounidense Michael Jackson, compuesta por Rod Temperton y producida por Quincy Jones.", java.sql.Date.valueOf("1984-01-11"), 2000, "DVD", "Pop");
-
-        //poblar Item Renatdo
-        ItemRentado ir1=new ItemRentado(0,i1, java.sql.Date.valueOf("2017-01-01"), java.sql.Date.valueOf("2017-03-12"));
-        ItemRentado ir2=new ItemRentado(0,i2, java.sql.Date.valueOf("2017-01-04"), java.sql.Date.valueOf("2017-04-7"));
-        ItemRentado ir3=new ItemRentado(0,i1, java.sql.Date.valueOf("2017-01-07"), java.sql.Date.valueOf("2017-07-12"));
-        ArrayList<ItemRentado> list1 = new ArrayList<>();
-        list1.add(ir1);
-        ArrayList<ItemRentado> list2 = new ArrayList<>();
-        list2.add(ir2);
-        ArrayList<ItemRentado> list3 = new ArrayList<>();
-        list3.add(ir3);
-
-        //poblar clientes
-        Cliente c1=new Cliente("Oscar Alba", 1026585664, "6788952", "KRA 109#34-C30", "oscar@hotmail.com", false,list1);
-        Cliente c2=new Cliente("Carlos Ramirez", 1026585663, "6584562", "KRA 59#27-a22", "carlos@hotmail.com", false,list2);
-        Cliente c3=new Cliente("Ricardo Pinto", 1026585669, "4457863", "KRA 103#94-a77", "ricardo@hotmail.com", false,list3);
-        Cliente myClient = new Cliente("Javier", 1007595767, "3138315599", "Cogua", "jago27@mapla.com");
-        //Consultar clientes
-        alquilerLogic.registrarCliente(myClient);
-        alquilerLogic.registrarCliente(c1);
-        alquilerLogic.registrarCliente(c2);
-        alquilerLogic.registrarCliente(c3);
-        System.out.println(alquilerLogic.consultarClientes());
-        //Consultar cliente por documento
-        System.out.println(alquilerLogic.consultarCliente(1026585663));
-
-    }
-
-    /**
      * Programa que usa la logica punto 9 parte I
      * @param args
      * @throws SQLException
      */
     public static void main(String args[]) throws SQLException, ExcepcionServiciosAlquiler {
-
-        Injector guice = Guice.createInjector((com.google.inject.Module) ServiciosAlquilerFactory.getInstance().getServiciosAlquiler());
-        ServiciosAlquiler serviciosAlquiler = guice.getInstance(ServiciosAlquiler.class);
-        System.out.println(serviciosAlquiler.consultarCliente(1));
+        ServiciosAlquiler serviciosAlquilerSt = new ServiciosAlquilerItemsStub();
+        ServiciosAlquiler serviciosAlquilerIm = new ServiciosAlquilerItemsStub();
+        //St
+        // Crear cliente Stub
+        try {
+            Cliente cliente = new Cliente("Rojas FC", 2165117, "312540044", "casa", "jago@" );
+            serviciosAlquilerSt.registrarCliente(cliente);
+        }catch (ExcepcionServiciosAlquiler ex){
+            System.out.println(ex.getMessage());
+        }
+        // Consultar Clientes
+        try {
+            List<Cliente> clientes = serviciosAlquilerIm.consultarClientes();
+            System.out.println(clientes.toString());
+        } catch (ExcepcionServiciosAlquiler ex){
+            System.out.println(ex.getMessage());
+        }
 
 
     }
